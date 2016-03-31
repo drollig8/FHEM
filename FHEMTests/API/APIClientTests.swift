@@ -14,17 +14,18 @@ import XCTest
 class APIClientTests: XCTestCase {
     
     override func setUp() {
+        if !onelineTests {return}
         super.setUp()
     }
     
     func test_WeGetRealDataAtAll() {
-        if offlineTestsOnly {return}
+        if !onelineTests {return}
         let sut = APIClient()
         let exp = expectationWithDescription("FHEMInfoReceived")
         
         let urlString = "http://supermanager.noip.me:8083/fhem?cmd=jsonlist2&XHR=1"
         
-        sut.getFhemInfos(urlString) { (fhemInfos, error) in
+        sut.getActors(urlString) { (fhemInfos, error) in
             print(error)
             if let fhemInfos = fhemInfos {
                 XCTAssertTrue(fhemInfos.count > 83)
@@ -37,13 +38,13 @@ class APIClientTests: XCTestCase {
     
     // TODO: We need to use Offline Data
     func test_DetailData() {
-        if offlineTestsOnly {return}
+        if !onelineTests {return}
         let sut = APIClient()
         let exp = expectationWithDescription("FHEMInfoReceived")
         
         let urlString = "http://supermanager.noip.me:8083/fhem?cmd=jsonlist2&XHR=1"
         
-        sut.getFhemInfos(urlString) { (fhemInfos, error) in
+        sut.getActors(urlString) { (fhemInfos, error) in
             print(error)
             if let fhemInfos = fhemInfos {
                 XCTAssertTrue(fhemInfos.count > 83)
@@ -57,13 +58,13 @@ class APIClientTests: XCTestCase {
     }
 
     func testWeCanSetDimmerToOn() {
-        if offlineTestsOnly {return}
+        if !onelineTests {return}
 
         let sut = APIClient()
         let exp = expectationWithDescription("FHEMTurnedOn")
         let urlString = "http://supermanager.noip.me:8083/fhem?cmd=jsonlist2&XHR=1"
         
-        sut.getFhemInfos(urlString) { (fhemInfos, error) in
+        sut.getActors(urlString) { (fhemInfos, error) in
             print(error)
             if let fhemInfos = fhemInfos {
                 XCTAssertTrue(fhemInfos.count > 83)
@@ -80,6 +81,4 @@ class APIClientTests: XCTestCase {
         self.waitForExpectationsWithTimeout(3.0, handler: nil)
     }
 
-    
-        
 }

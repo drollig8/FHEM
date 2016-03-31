@@ -8,4 +8,5 @@
 
 import Foundation
 
-let offlineTestsOnly = true
+let onelineTests     = false  // default false
+let printWWWResponse = false // default false

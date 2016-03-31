@@ -12,22 +12,17 @@ struct Actor {
     
     let name: String
     var state: String? // on, off
-    let imageName: String? = nil
+    let imageName: String?
+    var visible: Bool
+    
+
     
     
-    var iodev:String? = ""
-    var group:String? = ""
-    var model:String? = ""
-    var room:String? = ""
-    var def:String? = ""
-    var name_internal:String? = ""
-    var nr:String? = ""
-    var type:String? = ""
-    
-    
-    init(name: String, state:String?=nil) {
+    init(name: String, state:String?=nil, imageName:String?=nil, visible:Bool=true) {
         self.name = name
         self.state = state
+        self.imageName = imageName
+        self.visible = visible
     }
     
 }

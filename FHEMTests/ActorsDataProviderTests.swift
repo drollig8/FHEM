@@ -25,19 +25,18 @@ das SUT aus DataSource geben, der Frame gesetzt, die ZellenKlasse MockCell regis
 
 class ActorsDataProviderTests: XCTestCase {
 
-    /*
-    var sut: SelectionDataProvider!
-    var controller: ContentViewController!
+    
+    var sut: ActorsDataProvider!
+    var controller: ActorsCollectionViewController!
     var collectionView: UICollectionView!
 
     
     override func setUp() {
         super.setUp()
-        sut = SelectionDataProvider(page:0)
+        sut = ActorsDataProvider()
         let layout = UICollectionViewFlowLayout()
         collectionView = UICollectionView(frame: CGRectMake(0, 0, 100, 100), collectionViewLayout: layout)
-        collectionView.registerClass(BeverageCell.self, forCellWithReuseIdentifier: "Cell")
-        
+        collectionView.registerClass(ActorCell.self, forCellWithReuseIdentifier: "Cell")
         collectionView.dataSource = sut
     }
     
@@ -46,42 +45,56 @@ class ActorsDataProviderTests: XCTestCase {
     }
     
 
-    func testDataProvider_ReturnsThreeSections() {
+    func DIStestDataProvider_ReturnsThreeSections() {
         let numberOfSections = collectionView.numberOfSections()
         XCTAssertEqual(numberOfSections, 3)
     }
     
-    func testDataProvider_ReturnsThreeRows() {
+    
+    func DIStestDataProvider_ReturnsThreeRows() {
         XCTAssertEqual(collectionView.numberOfItemsInSection(0), 3)
     }
     
-    func test_CellIstNotNil() {
+    
+    func DIS_test_CellIstNotNil() {
         let cell = sut.collectionView(collectionView, cellForItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
         XCTAssertNotNil(cell)
     }
     
-    func test_CellGetsDequeued() {
+    
+     
+    func DIS_test_CellGetsDequeued() {
         let mockCollectionView = MockCollectionView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), collectionViewLayout: UICollectionViewFlowLayout())
         mockCollectionView.dataSource = sut
-        mockCollectionView.registerClass(BeverageCell.self, forCellWithReuseIdentifier: "Cell")
+        mockCollectionView.registerClass(ActorCell.self, forCellWithReuseIdentifier: "Cell")
         let cell = sut.collectionView(mockCollectionView, cellForItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
         XCTAssertTrue(mockCollectionView.cellGotDequeued)
-        XCTAssertTrue(cell is BeverageCell)
+        XCTAssertTrue(cell is ActorCell)
     }
+    
     
     func test_DataProviderHasValidItemManager() {
         XCTAssertNotNil(sut.itemManager)
     }
     
-    func test_ConfigCellGetsCalled() {
+    
+    func DIStest_ConfigCellGetsCalled() {
         let mockCollectionView = MockCollectionView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), collectionViewLayout: UICollectionViewFlowLayout())
         mockCollectionView.dataSource = sut
-        mockCollectionView.registerClass(MockBeverageCell.self, forCellWithReuseIdentifier: "Cell")
-        let cell = sut.collectionView(mockCollectionView, cellForItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0)) as! MockBeverageCell
+        mockCollectionView.registerClass(MockActorCell.self, forCellWithReuseIdentifier: "Cell")
+        let cell = sut.collectionView(mockCollectionView, cellForItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0)) as! MockActorCell
 
         XCTAssertTrue(cell.configureCellGotCalled)
     }
     
+    func testSelectingCellTurnsOnOrOff() {
+        let fakeApiClient = FakeApiClient()
+        sut.itemManager.apiClient = fakeApiClient
+        sut.collectionView(collectionView, didSelectItemAtIndexPath: NSIndexPath(forItem: 1, inSection: 0))
+        XCTAssertTrue(fakeApiClient.didCallTurnOnActor)
+    }
+    
+    /*
     func testSelectingACell_SendsNotification() {
         sut = SelectionDataProvider(page:7)
         
@@ -115,12 +128,19 @@ extension ActorsDataProviderTests {
         
     }
     
-    /*
-    class MockBeverageCell: BeverageCell {
+    
+    class MockActorCell: ActorCell {
         var configureCellGotCalled = false
-        override func configureCellWithItem(beverageItem: Beverage) {
+        override func configureCellWithItem(actor: Actor) {
             configureCellGotCalled = true
         }
     }
- */
+    
+    class FakeApiClient: APIClient {
+        var didCallTurnOnActor = false
+        override func turnOn(actor:Actor, completion: (String?,  ErrorType?) -> Void) {
+            didCallTurnOnActor = true
+        }
+    }
+ 
 }

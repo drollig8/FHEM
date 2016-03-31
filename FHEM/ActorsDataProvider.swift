@@ -10,34 +10,56 @@ import UIKit
 
 class ActorsDataProvider: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
 
-    init(page:Int) {
-        self.page = page
-    }
-    
     let itemManager = ActorManager()
+    
     var page: Int = 0
+    
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 3
+        print("ActorsDataProvider: returning number of Sections = 1")
+        return 1
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return itemManager.numberOfActors
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-       
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! ActorCell
-   //     cell.configureCellWithItem(itemManager.itemAtIndex(indexForIndexPath(indexPath), page: page))
-        return cell
+        
+        if let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as? ActorCell {
+            cell.configureCellWithItem(itemManager.itemAtIndex(indexPath.row))
+            return cell
+        } else {
+            return UICollectionViewCell()
+        }
+
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        NSNotificationCenter.defaultCenter().postNotificationName("ItemSelectedNotification", object: self, userInfo: ["index":indexForIndexPath(indexPath),"page":page])
+        print("ActorsDataProvider: didSelectItemAtIndexPath (editMode = \(editMode)")
+        
+        let actor = itemManager.itemAtIndex(indexPath.row)
+        
+        if editMode {
+            itemManager.removeActorAtIndex(indexPath.row)
+        } else {
+            itemManager.apiClient.turnOn(actor) { (_, _) in
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    print("ApiClient: Finished turning on or off Actor. Please reload data.")
+                    self.itemManager.refresh()
+                }
+                
+            }
+        }
     }
     
     private func indexForIndexPath(indexPath: NSIndexPath) -> Int {
+        
+
         switch indexPath {
+          
+
             case NSIndexPath(forItem: 0, inSection: 0): return 0
             case NSIndexPath(forItem: 1, inSection: 0): return 1
             case NSIndexPath(forItem: 2, inSection: 0): return 2
@@ -47,7 +69,11 @@ class ActorsDataProvider: NSObject, UICollectionViewDataSource, UICollectionView
             case NSIndexPath(forItem: 0, inSection: 2): return 6
             case NSIndexPath(forItem: 1, inSection: 2): return 7
             case NSIndexPath(forItem: 2, inSection: 2): return 8
+            
             default: return 0
         }
     }
+    
+    
+    
 }

@@ -12,7 +12,7 @@ class APIClient {
     
     lazy var session: FhemUrlSession = NSURLSession.sharedSession()
     
-    func getFhemInfos(urlString: String, completion: ([FHEMInfo]?,  ErrorType?) -> Void) {
+    func getActors(urlString: String, completion: ([Actor]?,  ErrorType?) -> Void) {
         
         
         guard let url = NSURL(string: urlString) else {fatalError()}
@@ -27,7 +27,7 @@ class APIClient {
             }
             
             if let data = data {
-                do {
+                
                     let stringData = String(data: data, encoding: NSASCIIStringEncoding)
                     print("\(NSDate().toHourMinuteSecond()): Received Bytes: \(stringData?.characters.count ?? 0)")
                     let json = JSON(data: data )
@@ -36,49 +36,29 @@ class APIClient {
                     
                     let results = json["Results"]
                     
-                    var fhemInfos = [FHEMInfo]()
+                    var actors = [Actor]()
                     
                     for (_,result) in results {
-
-                        
-                        var fhemInfo = FHEMInfo(name: result["Name"].stringValue)
-                        
-                        
-                        
+                        print(result)
                         let internals = result["Internals"]
-                            let def = internals["DEF"].stringValue
-                            let name = internals["NAME"].stringValue
-                            let nr = internals["NR"].stringValue
-                            let state = internals["STATE"].stringValue
-                            let type = internals["TYPE"].stringValue
-                            fhemInfo.def = def
-                            fhemInfo.name_internal = name
-                            fhemInfo.def = def
-                            fhemInfo.nr = nr
-                            fhemInfo.state = state
-                            fhemInfo.type = type
+                        let name = internals["NAME"].stringValue
+                        let state = internals["STATE"].stringValue
+                        let xxx = internals["ROOM"].stringValue
+                        //print("\(name)  \(xxx) " )
+                        let actor = Actor(name: name, state: state, imageName: nil)
 
-                        
-                        let attributes = result["Attributes"]
-                            let iodev = attributes["IODev"].stringValue
-                            let group = attributes["group"].stringValue
-                            let model = attributes["model"].stringValue
-                            let room = attributes["room"].stringValue
-                            fhemInfo.iodev = iodev
-                            fhemInfo.group = group
-                            fhemInfo.model = model
-                            fhemInfo.room = room
-
-                        
-                        fhemInfos.append(fhemInfo)
+                        let attributes =  result["Attributes"]
+                        let model = attributes["model"].stringValue
+                        print()
+                        if model == "itswitch" {
+                            actors.append(actor)
+                        }
                     }
                     
-                    fhemInfos.sortInPlace({ $1.name > $0.name })
-                    completion(fhemInfos, nil)
-                }
-                catch {
-                    print("Error: \(error)")
-                }
+                    actors.sortInPlace({ $1.name > $0.name })
+                    completion(actors, nil)
+                
+               
             }
 
             else {
@@ -90,10 +70,16 @@ class APIClient {
         }
     
     
-    func turnOn(fhem:FHEMInfo, completion: (String?,  ErrorType?) -> Void) {
-        let deviceName = fhem.name
+    func turnOn(actor:Actor, completion: (String?,  ErrorType?) -> Void) {
+        print("Turning on: \(actor.name)")
+        
+        let deviceName = actor.name
         assert(!deviceName.isEmpty)
-        let urlString = "supermanager.noip.me:8083/fhem?cmd=set+\(deviceName)+on"
+        
+        let onOff = actor.state == "on" ? "off" : "on"
+        //let urlString = "supermanager.noip.me:8083/fhem?cmd=set+\(deviceName)+on"
+        let urlString = "http://home:8083/fhem?cmd=set+\(deviceName)+\(onOff)"
+        print(urlString)
         
         guard let url = NSURL(string: urlString) else {fatalError()}
         let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
@@ -114,6 +100,7 @@ class APIClient {
             }
         }
         task.resume()
+ 
     }
     
     
