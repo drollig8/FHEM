@@ -18,6 +18,9 @@ class ActorsCollectionViewControllerTests:XCTestCase {
         super.setUp()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         sut = storyboard.instantiateViewControllerWithIdentifier("ActorsCollectionViewController") as! ActorsCollectionViewController
+        
+        let fakeDataProvider = FakeDataProvider()
+        sut.collectionDataProvider = fakeDataProvider
         _ = sut.view
     }
     
@@ -69,4 +72,16 @@ class ActorsCollectionViewControllerTests:XCTestCase {
     }
 
     
+}
+
+extension ActorsCollectionViewControllerTests {
+    class FakeDataProvider: ActorsDataProvider {
+        override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+            return 1
+        }
+        override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+            return UICollectionViewCell()
+        }
+        
+    }
 }

@@ -56,9 +56,16 @@ class ActorsCollectionViewController: UIViewController, UIGestureRecognizerDeleg
     }
     
     func showSettings() {
+        /*
+        let sceneEditorViewController = SceneEditorViewController()
+        let navController = UINavigationController(rootViewController: sceneEditorViewController)
+        presentViewController(navController, animated: true, completion: nil)
+ */
+        
         let settingsViewController = SettingsViewController()
         let navController = UINavigationController(rootViewController: settingsViewController)
         presentViewController(navController, animated: true, completion: nil)
+        
     }
     
     func activateDeletionMode() {

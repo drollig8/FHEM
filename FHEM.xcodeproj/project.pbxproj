@@ -10,6 +10,10 @@
 		6E5431B61CAD815700F23D4F /* ActorCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5431B51CAD815700F23D4F /* ActorCellTests.swift */; };
 		6E5431B81CADAF9900F23D4F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5431B71CADAF9900F23D4F /* SettingsViewController.swift */; };
 		6E5431BA1CADB53E00F23D4F /* SettingsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5431B91CADB53E00F23D4F /* SettingsViewControllerTests.swift */; };
+		6E5431BC1CADC72D00F23D4F /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5431BB1CADC72D00F23D4F /* SettingsManager.swift */; };
+		6E5431BE1CADC73B00F23D4F /* SettingsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5431BD1CADC73B00F23D4F /* SettingsManagerTests.swift */; };
+		6E5431C01CADD2DA00F23D4F /* SceneEditorViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5431BF1CADD2DA00F23D4F /* SceneEditorViewControllerTests.swift */; };
+		6E5431C21CADD31E00F23D4F /* SceneEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5431C11CADD31E00F23D4F /* SceneEditorViewController.swift */; };
 		6EA2AEDE1CAD2848002AC643 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA2AEDD1CAD2848002AC643 /* ModelTests.swift */; };
 		6EA2AEE11CAD2A2B002AC643 /* ActorsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA2AEE01CAD2A2B002AC643 /* ActorsCollectionViewController.swift */; };
 		6EA2AEE41CAD2A46002AC643 /* ActorsCollectionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA2AEE31CAD2A46002AC643 /* ActorsCollectionViewTests.swift */; };
@@ -49,6 +53,10 @@
 		6E5431B51CAD815700F23D4F /* ActorCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActorCellTests.swift; path = Controller/ActorCellTests.swift; sourceTree = "<group>"; };
 		6E5431B71CADAF9900F23D4F /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = Controller/SettingsViewController.swift; sourceTree = "<group>"; };
 		6E5431B91CADB53E00F23D4F /* SettingsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewControllerTests.swift; sourceTree = "<group>"; };
+		6E5431BB1CADC72D00F23D4F /* SettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		6E5431BD1CADC73B00F23D4F /* SettingsManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsManagerTests.swift; sourceTree = "<group>"; };
+		6E5431BF1CADD2DA00F23D4F /* SceneEditorViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SceneEditorViewControllerTests.swift; path = Controller/SceneEditorViewControllerTests.swift; sourceTree = "<group>"; };
+		6E5431C11CADD31E00F23D4F /* SceneEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SceneEditorViewController.swift; path = Controller/SceneEditorViewController.swift; sourceTree = "<group>"; };
 		6EA2AEDD1CAD2848002AC643 /* ModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		6EA2AEE01CAD2A2B002AC643 /* ActorsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActorsCollectionViewController.swift; sourceTree = "<group>"; };
 		6EA2AEE31CAD2A46002AC643 /* ActorsCollectionViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActorsCollectionViewTests.swift; path = Controller/ActorsCollectionViewTests.swift; sourceTree = "<group>"; };
@@ -99,6 +107,7 @@
 		6EA2AED71CAD2813002AC643 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6E5431BB1CADC72D00F23D4F /* SettingsManager.swift */,
 				6EE1A08C1CAD6077008D7E03 /* Actor.swift */,
 				6EE1A08A1CAD6062008D7E03 /* ActorManager.swift */,
 				6EFE09B11CAD18850000C21D /* Model.swift */,
@@ -154,6 +163,7 @@
 				6EE1A08E1CAD6096008D7E03 /* ActorTest.swift */,
 				6EE1A0901CAD60A6008D7E03 /* ActorManagerTests.swift */,
 				6EA2AEDD1CAD2848002AC643 /* ModelTests.swift */,
+				6E5431BD1CADC73B00F23D4F /* SettingsManagerTests.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -161,6 +171,7 @@
 		6EA2AEDF1CAD2A0D002AC643 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6E5431C11CADD31E00F23D4F /* SceneEditorViewController.swift */,
 				6EA2AEE01CAD2A2B002AC643 /* ActorsCollectionViewController.swift */,
 				6E5431B71CADAF9900F23D4F /* SettingsViewController.swift */,
 				6EE1A0821CAD5F27008D7E03 /* ActorsDataProvider.swift */,
@@ -176,6 +187,7 @@
 				6E5431B91CADB53E00F23D4F /* SettingsViewControllerTests.swift */,
 				6EE1A0841CAD5F2F008D7E03 /* ActorsDataProviderTests.swift */,
 				6E5431B51CAD815700F23D4F /* ActorCellTests.swift */,
+				6E5431BF1CADD2DA00F23D4F /* SceneEditorViewControllerTests.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -333,9 +345,11 @@
 				6EE1A0811CAD5B27008D7E03 /* Constants.swift in Sources */,
 				6EFE09921CAD17AF0000C21D /* ViewController.swift in Sources */,
 				6EE1A08B1CAD6062008D7E03 /* ActorManager.swift in Sources */,
+				6E5431BC1CADC72D00F23D4F /* SettingsManager.swift in Sources */,
 				6EFE09901CAD17AF0000C21D /* AppDelegate.swift in Sources */,
 				6EFE09BA1CAD211F0000C21D /* SwiftyJSON.swift in Sources */,
 				6EFE09B41CAD18B80000C21D /* APIClient.swift in Sources */,
+				6E5431C21CADD31E00F23D4F /* SceneEditorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +357,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E5431C01CADD2DA00F23D4F /* SceneEditorViewControllerTests.swift in Sources */,
 				6E5431B61CAD815700F23D4F /* ActorCellTests.swift in Sources */,
 				6EE1A0851CAD5F2F008D7E03 /* ActorsDataProviderTests.swift in Sources */,
 				6EA2AEE41CAD2A46002AC643 /* ActorsCollectionViewTests.swift in Sources */,
@@ -351,6 +366,7 @@
 				6E5431BA1CADB53E00F23D4F /* SettingsViewControllerTests.swift in Sources */,
 				6EE1A08F1CAD6096008D7E03 /* ActorTest.swift in Sources */,
 				6EE1A0911CAD60A6008D7E03 /* ActorManagerTests.swift in Sources */,
+				6E5431BE1CADC73B00F23D4F /* SettingsManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

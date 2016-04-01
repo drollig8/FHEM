@@ -36,5 +36,24 @@ class SettingsViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.title, "Settings")
     }
     
+    func testTableViewStyleIs_Grouped() {
+        XCTAssertTrue(sut.tableView.style == .Grouped)
+    }
+    
+    func testTableViewHasDatasouce() {
+        XCTAssertNotNil(sut.tableView.dataSource)
+        }
+    
+    func testTableViewReturns2Sections() {
+        XCTAssertEqual(sut.tableView.numberOfSections, 2)
+    }
+    
+    func testTableViewReturnServerSettingsHeader() {
+        XCTAssertEqual(sut.tableView(sut.tableView, titleForHeaderInSection: 0), "Server Settings")
+    }
+    
+    func testTableViewHasSettingsManagber() {
+        XCTAssertNotNil(sut.settingsManager)
+    }
     
 }
