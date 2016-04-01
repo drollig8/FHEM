@@ -58,11 +58,14 @@ class SceneEditorViewControllerTests: XCTestCase {
     }
     
     func testSUT_HasGroupManager() {
-        XCTAssertNotNil(sut.groupManager)
+        XCTAssertNotNil(sut.sceneManager)
     }
     
     // we ell later test, that the group manager handles dublicate entries, can remove entries and so forth.
-    func testSUT_GroupManagerCanAddSettings() {
+    func testSUT_GroupManagerCanAddNewSceneToSceneManager() {
         
+        let sceneManager = SceneManager()
+        sut.sceneManager = sceneManager
+//        XCTAssertTrue(sceneManager.numberOfItems,0)
     }
 }

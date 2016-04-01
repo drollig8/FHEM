@@ -8,14 +8,12 @@
 
 import UIKit
 
-class GroupManager {
-    
-}
+
 
 class SceneEditorViewController: UIViewController, UITableViewDataSource {
 
     var tableView: UITableView!
-    var groupManager = GroupManager()
+    var sceneManager = SceneManager()
     var groupname = ""
     var membersOn:[Actor]!
     var membersOff:[Actor]!
@@ -44,7 +42,7 @@ class SceneEditorViewController: UIViewController, UITableViewDataSource {
     }
     
     func save() {
-        //
+        
     }
     
     // MARK: - TableView
